@@ -152,20 +152,8 @@ export default function Lightning() {
       </div>
       <div className="container flex flex-col items-center justify-center my-4">
         <p className="text-sm text-base-content/70 py-4 text-center">
-          This playground is hosted on{" "}
-          <strong>
-            <a href="https://fal.ai" className="underline" target="_blank">
-              fal.ai
-            </a>
-          </strong>{" "}
-          and is for demonstration purposes only.
+          This is a demo of super fast AI with Meroku MicroTransactions
         </p>
-        <div className="flex flex-row items-center space-x-2">
-          <span className="text-xs font-mono">powered by</span>
-          <Link href="https://fal.ai" target="_blank">
-            <ModelIcon />
-          </Link>
-        </div>
       </div>
       <ToastContainer />
     </main>

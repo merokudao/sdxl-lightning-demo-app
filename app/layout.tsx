@@ -8,13 +8,11 @@ import { Providers } from "@/components/providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SDXL Lightning - Crypto Features by Meroku",
+  title: "Micro Transactions by Meroku",
   description:
-    "Experience lightning-fast SDXL API demo with crypto features by Meroku",
-  authors: [{ name: "fal.ai", url: "https://fal.ai" }],
-  metadataBase: new URL("https://fastsdxl.ai"),
+    "Experience lightning-fast AI with micro transactions. Only via Meroku",
   openGraph: {
-    images: "/og_thumbnail.jpeg",
+    images: "/meroku-full-logo.png",
   },
 };
 
