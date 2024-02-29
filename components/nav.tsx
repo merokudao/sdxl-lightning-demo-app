@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GithubIcon } from "lucide-react";
 import { Wallet } from "@/components/ui/wallet";
+import Image from "next/image";
 
 const spaceMono = Space_Mono({
   weight: "400",
@@ -23,7 +24,12 @@ export function Nav() {
     >
       <div className="flex flex-1 items-center">
         <Link href="/">
-          <h1 className={cn("font-light text-xl", spaceMono.className)}></h1>
+          <Image
+            src="/meroku-full-logo.png"
+            alt="logo"
+            height={48}
+            width={144}
+          />
         </Link>
       </div>
       <div className="flex flex-none items-center space-x-4">
