@@ -29,7 +29,7 @@ export default function RootLayout({
           display: "flex",
           flex: 1,
           flexDirection: "column",
-          height: "100vh",
+          height: "100dvh",
         }}
       >
         <Analytics />
