@@ -88,7 +88,7 @@ export default function Lightning() {
   }, []);
 
   return (
-    <main>
+    <main className="w-2/4 mx-auto">
       <div className="container py-4 px-1.5 space-y-4 lg:space-y-8 mx-auto">
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
