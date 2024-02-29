@@ -75,15 +75,13 @@ export default function Lightning() {
 
   useEffect(() => {
     // initial image
-    if (canExecuteOperation()) {
-      setLoading(true);
-      connection.send({
-        ...INPUT_DEFAULTS,
-        num_inference_steps: "4",
-        prompt: prompt,
-        seed: seed ? Number(seed) : Number(randomSeed()),
-      });
-    }
+    setLoading(true);
+    connection.send({
+      ...INPUT_DEFAULTS,
+      num_inference_steps: "4",
+      prompt: prompt,
+      seed: seed ? Number(seed) : Number(randomSeed()),
+    });
   }, []);
 
   return (
