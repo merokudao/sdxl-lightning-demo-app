@@ -36,7 +36,7 @@ export default function RootLayout({
         <Providers>
           <>
             <Nav />
-            {children}
+            <div className="flex w-full h-full overflow-y-auto">{children}</div>
           </>
         </Providers>
       </body>

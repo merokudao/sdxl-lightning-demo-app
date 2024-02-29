@@ -7,8 +7,6 @@ import Image from "next/image";
 const Wallet = () => {
   const { balance, address, currency } = useWallet();
 
-  const truncatedAddress = `${address.slice(0, 4)}...${address.slice(-4)}`;
-
   return (
     <div className="flex items-center text-lg font-semibold gap-2 bg-black text-white dark:bg-white dark:text-black py-1 px-4 rounded-lg cursor-pointer">
       <span className=""></span>
@@ -20,7 +18,7 @@ const Wallet = () => {
         alt="avatar"
         className="rounded-full"
       />
-      {truncatedAddress}
+      {address}
       <ChevronDown />
     </div>
   );

@@ -91,11 +91,11 @@ export default function Lightning() {
   }, []);
 
   return (
-    <main className="w-full mx-auto md:w-2/4">
+    <main className="w-full mx-auto md:w-2/4 px-2">
       <div className="container py-4 px-1.5 space-y-4 lg:space-y-8 mx-auto">
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
-            <div className="flex-1 space-y-1">
+            <div className="flex flex-col w-full space-y-1">
               <label>Prompt</label>
               <Input
                 onChange={(e) => {
@@ -106,29 +106,31 @@ export default function Lightning() {
                 value={prompt}
               />
             </div>
-            <div className="space-y-1">
-              <label>Seed</label>
-              <Input
-                onChange={(e) => {
-                  setSeed(e.target.value);
+            <div className="flex w-full md:max-w-[200px] gap-6">
+              <div className="flex flex-col w-full space-y-1">
+                <label>Seed</label>
+                <Input
+                  onChange={(e) => {
+                    setSeed(e.target.value);
+                    handleOnChange(prompt);
+                  }}
+                  className="font-light w-full"
+                  placeholder="random"
+                  type="number"
+                  value={seed}
+                />
+              </div>
+              <button
+                className="flex w-fit ml-auto items-end pb-2 justify-center"
+                onClick={() => {
+                  const newSeed = randomSeed();
+                  setSeed(newSeed);
                   handleOnChange(prompt);
                 }}
-                className="font-light w-full"
-                placeholder="random"
-                type="number"
-                value={seed}
-              />
+              >
+                <RefreshCcw />
+              </button>
             </div>
-            <button
-              className="flex items-end pb-2 justify-center"
-              onClick={() => {
-                const newSeed = randomSeed();
-                setSeed(newSeed);
-                handleOnChange(prompt);
-              }}
-            >
-              <RefreshCcw />
-            </button>
           </div>
         </div>
         <div className="flex flex-col space-y-6 lg:flex-row lg:space-y-0">
@@ -144,7 +146,7 @@ export default function Lightning() {
                 {loading ? <Spinner /> : null}
               </div>
             )}
-            <div className="min-h-[512px] max-w-fit">
+            <div className="min-h-[256px] h-[256px] aspect-square md:min-h-[512px] max-w-fit ">
               {image && (
                 <img id="imageDisplay" src={image} alt="Dynamic Image" />
               )}
