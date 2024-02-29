@@ -74,14 +74,20 @@ export default function Lightning() {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.document.cookie = "fal-app=true; path=/; samesite=strict; secure;";
+    }
+
     // initial image
-    setLoading(true);
-    connection.send({
-      ...INPUT_DEFAULTS,
-      num_inference_steps: "4",
-      prompt: prompt,
-      seed: seed ? Number(seed) : Number(randomSeed()),
-    });
+    if (canExecuteOperation()) {
+      setLoading(true);
+      connection.send({
+        ...INPUT_DEFAULTS,
+        num_inference_steps: "4",
+        prompt: prompt,
+        seed: seed ? Number(seed) : Number(randomSeed()),
+      });
+    }
   }, []);
 
   return (
