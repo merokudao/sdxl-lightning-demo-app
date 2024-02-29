@@ -7,9 +7,13 @@ import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ModelIcon } from "@/components/icons/model-icon";
 import Link from "next/link";
+import { useWallet } from "@/components/wallet-provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RefreshCcw } from "lucide-react";
 
 const DEFAULT_PROMPT =
-  "A cinematic shot of a baby raccoon wearing an intricate italian priest robe";
+  "A cinematic shot of a baby panda wearing an intricate chinese priest robe sitting on a tesla bonnet";
 
 function randomSeed() {
   return Math.floor(Math.random() * 10000000).toFixed(0);
@@ -33,6 +37,9 @@ export default function Lightning() {
   const [prompt, setPrompt] = useState<string>(DEFAULT_PROMPT);
   const [seed, setSeed] = useState<string>(randomSeed());
   const [inferenceTime, setInferenceTime] = useState<number>(NaN);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { canExecuteOperation, executeOperation } = useWallet();
 
   const connection = fal.realtime.connect("fal-ai/fast-lightning-sdxl", {
     connectionKey: "lightning-sdxl",
@@ -41,6 +48,8 @@ export default function Lightning() {
       const blob = new Blob([result.images[0].content], { type: "image/jpeg" });
       setImage(URL.createObjectURL(blob));
       setInferenceTime(result.timings.inference);
+      executeOperation();
+      setLoading(false);
     },
   });
 
@@ -51,28 +60,31 @@ export default function Lightning() {
       clearTimeout(timer.current);
     }
     setPrompt(prompt);
-    const input = {
-      ...INPUT_DEFAULTS,
-      prompt: prompt,
-      seed: seed ? Number(seed) : Number(randomSeed()),
-    };
-    connection.send(input);
-    timer.current = setTimeout(() => {
-      connection.send({ ...input, num_inference_steps: "4" });
-    }, 500);
+    if (canExecuteOperation()) {
+      const input = {
+        ...INPUT_DEFAULTS,
+        prompt: prompt,
+        seed: seed ? Number(seed) : Number(randomSeed()),
+      };
+      setLoading(true);
+      connection.send(input);
+      timer.current = setTimeout(() => {
+        connection.send({ ...input, num_inference_steps: "4" });
+      }, 500);
+    }
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.document.cookie = "fal-app=true; path=/; samesite=strict; secure;";
-    }
     // initial image
-    connection.send({
-      ...INPUT_DEFAULTS,
-      num_inference_steps: "4",
-      prompt: prompt,
-      seed: seed ? Number(seed) : Number(randomSeed()),
-    });
+    if (canExecuteOperation()) {
+      setLoading(true);
+      connection.send({
+        ...INPUT_DEFAULTS,
+        num_inference_steps: "4",
+        prompt: prompt,
+        seed: seed ? Number(seed) : Number(randomSeed()),
+      });
+    }
   }, []);
 
   return (
@@ -81,7 +93,7 @@ export default function Lightning() {
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
             <div className="flex-1 space-y-1">
-              <label>Prompt</label>
+              <label>Prompt {loading ? "true" : "false"}</label>
               <Input
                 onChange={(e) => {
                   handleOnChange(e.target.value);
@@ -104,6 +116,16 @@ export default function Lightning() {
                 value={seed}
               />
             </div>
+            <button
+              className="flex items-end pb-2 justify-center"
+              onClick={() => {
+                const newSeed = randomSeed();
+                setSeed(newSeed);
+                handleOnChange(prompt);
+              }}
+            >
+              <RefreshCcw />
+            </button>
           </div>
         </div>
         <div className="flex flex-col space-y-6 lg:flex-row lg:space-y-0">
@@ -143,6 +165,7 @@ export default function Lightning() {
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 }
