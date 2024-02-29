@@ -5,6 +5,7 @@ import { Space_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GithubIcon } from "lucide-react";
+import { Wallet } from "@/components/ui/wallet";
 
 const spaceMono = Space_Mono({
   weight: "400",
@@ -22,25 +23,14 @@ export function Nav() {
     >
       <div className="flex flex-1 items-center">
         <Link href="/">
-          <h1 className={cn("font-light text-xl", spaceMono.className)}>
-            <span className="text-pink-700">sdxl</span>
-            <span>⚡️</span>
-            <span>lightning</span>
-          </h1>
+          <h1 className={cn("font-light text-xl", spaceMono.className)}></h1>
         </Link>
       </div>
       <div className="flex flex-none items-center space-x-4">
         <ThemeToggle />
-        <Button size="sm" asChild>
-          <Link
-            href="https://github.com/fal-ai/sdxl-lightning-demo-app"
-            className="flex flex-row space-x-2 items-center"
-            target="_blank"
-          >
-            <GithubIcon className="h-5 w-5" />
-            <span>Fork on GitHub</span>
-          </Link>
-        </Button>
+      </div>
+      <div>
+        <Wallet />
       </div>
     </div>
   );

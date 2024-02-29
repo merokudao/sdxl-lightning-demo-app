@@ -4,6 +4,8 @@ import "./globals.css";
 import { Nav } from "@/components/nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { WalletProvider } from "@/components/wallet-provider";
+import { Providers } from "@/components/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,15 +36,12 @@ export default function RootLayout({
         }}
       >
         <Analytics />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Nav />
-          {children}
-        </ThemeProvider>
+        <Providers>
+          <>
+            <Nav />
+            {children}
+          </>
+        </Providers>
       </body>
     </html>
   );
