@@ -5,8 +5,6 @@
 import * as fal from "@fal-ai/serverless-client";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { ModelIcon } from "@/components/icons/model-icon";
-import Link from "next/link";
 import { useWallet } from "@/components/wallet-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -89,7 +87,7 @@ export default function Lightning() {
   }, []);
 
   return (
-    <main className="w-2/4 mx-auto">
+    <main className="w-full mx-auto md:w-2/4">
       <div className="container py-4 px-1.5 space-y-4 lg:space-y-8 mx-auto">
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
