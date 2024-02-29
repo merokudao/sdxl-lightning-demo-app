@@ -91,7 +91,7 @@ export default function Lightning() {
   }, []);
 
   return (
-    <main className="w-full mx-auto md:w-2/4 px-2">
+    <main className="flex flex-col w-full h-full mx-auto md:w-2/4 px-2">
       <div className="container py-4 px-1.5 space-y-4 lg:space-y-8 mx-auto">
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
@@ -154,7 +154,7 @@ export default function Lightning() {
           </div>
         </div>
       </div>
-      <div className="container flex flex-col items-center justify-center my-4">
+      <div className="container flex flex-col items-center justify-center my-4 mt-auto">
         <p className="text-sm text-base-content/70 py-4 text-center">
           This is a demo of super fast AI with Meroku MicroTransactions
         </p>
