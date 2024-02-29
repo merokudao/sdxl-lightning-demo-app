@@ -11,6 +11,7 @@ import { useWallet } from "@/components/wallet-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RefreshCcw } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 const DEFAULT_PROMPT =
   "A cinematic shot of a baby panda wearing an intricate chinese priest robe sitting on a tesla bonnet";
@@ -93,7 +94,7 @@ export default function Lightning() {
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
             <div className="flex-1 space-y-1">
-              <label>Prompt {loading ? "true" : "false"}</label>
+              <label>Prompt</label>
               <Input
                 onChange={(e) => {
                   handleOnChange(e.target.value);
@@ -129,15 +130,16 @@ export default function Lightning() {
           </div>
         </div>
         <div className="flex flex-col space-y-6 lg:flex-row lg:space-y-0">
-          <div className="flex-1 flex-col flex items-center justify-center">
+          <div className="flex-1 flex-col gap-8 flex items-center justify-center">
             {image && inferenceTime && (
-              <div className="flex flex-row space-x-1">
+              <div className="flex flex-row justify-center items-center gap-4 space-x-1">
                 <span>inference time</span>
                 <strong>
                   {inferenceTime
                     ? `${(inferenceTime * 1000).toFixed(0)}ms`
                     : `n/a`}
                 </strong>
+                {loading ? <Spinner /> : null}
               </div>
             )}
             <div className="min-h-[512px] max-w-fit">

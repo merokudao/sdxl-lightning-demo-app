@@ -8,8 +8,9 @@ import { Providers } from "@/components/providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SDXL Lightning - by fal.ai",
-  description: "Lightning fast SDXL API demo by fal.ai",
+  title: "SDXL Lightning - Crypto Features by Meroku",
+  description:
+    "Experience lightning-fast SDXL API demo with crypto features by Meroku",
   authors: [{ name: "fal.ai", url: "https://fal.ai" }],
   metadataBase: new URL("https://fastsdxl.ai"),
   openGraph: {

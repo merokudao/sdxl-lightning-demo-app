@@ -1,24 +1,14 @@
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ModelIcon } from "@/components/icons/model-icon";
 import Link from "next/link";
 import { Space_Mono } from "next/font/google";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { GithubIcon } from "lucide-react";
 import { Wallet } from "@/components/ui/wallet";
 import Image from "next/image";
-
-const spaceMono = Space_Mono({
-  weight: "400",
-  display: "swap",
-  subsets: ["latin"],
-});
 
 export function Nav() {
   return (
     <div
       className="
-      py-2 px-2
+      py-3 px-2
       md:px-8
       border-b flex items-center"
     >
