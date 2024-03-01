@@ -94,7 +94,7 @@ export default function Lightning() {
     <main className="flex flex-col w-full h-full mx-auto md:w-2/4 px-2">
       <div className="container py-4 px-1.5 space-y-4 lg:space-y-8 mx-auto">
         <div className="flex flex-col space-y-2">
-          <div className="flex flex-col max-md:space-y-4 md:flex-row md:space-x-4">
+          <div className="flex gap-4 max-md:space-y-4 md:space-x-4">
             <div className="flex flex-col w-full space-y-1">
               <label>Prompt</label>
               <Input
@@ -106,8 +106,7 @@ export default function Lightning() {
                 value={prompt}
               />
             </div>
-            <div className="flex w-full md:max-w-[200px] gap-6">
-              <div className="flex flex-col w-full space-y-1">
+            {/* <div className="flex flex-col w-full space-y-1">
                 <label>Seed</label>
                 <Input
                   onChange={(e) => {
@@ -119,18 +118,17 @@ export default function Lightning() {
                   type="number"
                   value={seed}
                 />
-              </div>
-              <button
-                className="flex w-fit ml-auto items-end pb-2 justify-center"
-                onClick={() => {
-                  const newSeed = randomSeed();
-                  setSeed(newSeed);
-                  handleOnChange(prompt);
-                }}
-              >
-                <RefreshCcw />
-              </button>
-            </div>
+              </div> */}
+            <button
+              className="flex w-fit ml-auto items-end pb-2 justify-center"
+              onClick={() => {
+                const newSeed = randomSeed();
+                setSeed(newSeed);
+                handleOnChange(prompt);
+              }}
+            >
+              <RefreshCcw />
+            </button>
           </div>
         </div>
         <div className="flex flex-col space-y-6 lg:flex-row lg:space-y-0">
