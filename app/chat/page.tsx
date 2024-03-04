@@ -14,7 +14,7 @@ const ChatPage: React.FC = () => {
   return (
     <div className="flex flex-col w-full max-w-2xl mx-auto h-full text-lg pb-10 overflow-hidden relative">
       <div className="flex flex-col w-full h-full px-8 py-4 gap-8 overflow-y-auto">
-        <div className="h-18" />
+        <div className="h-[15%]" />
         <AnimatedMessage content={initialMessage} />
         {messages.map((message, index) => (
           <Message key={index} message={message} />
@@ -27,7 +27,7 @@ const ChatPage: React.FC = () => {
         onChange={handleInputChange}
         isLoading={isLoading}
       />
-      <div className="flex w-full h-[10%] absolute bg-gradient-to-b to-100% dark:from-black from-white to-transparent"></div>
+      <div className="flex w-full h-[10%] absolute bg-gradient-to-b to-100% dark:from-zinc-950 from-white to-transparent"></div>
     </div>
   );
 };
