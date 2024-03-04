@@ -1,5 +1,5 @@
 import { Message } from "ai/react";
-import { FC, useDeferredValue, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { motion, useAnimate, stagger } from "framer-motion";
 
 interface MessageProps {
@@ -10,18 +10,55 @@ const Message: FC<MessageProps> = (props: MessageProps) => {
   const { role, content } = props.message;
 
   if (role === "user") {
-    return (
-      <div
-        className={`flex w-fit px-4 py-2 rounded-lg ${
-          role === "user" ? "max-w-xl ml-auto bg-slate-800" : "mr-auto"
-        }`}
-      >
-        <p className="leading-9">{content}</p>
-      </div>
-    );
+    return <AnimateUserMessage content={content} />;
   }
 
   return <AnimateMsg content={content} />;
+};
+
+const AnimateUserMessage: FC<{ content: string }> = (props) => {
+  const { content } = props;
+  const [scope, animate] = useAnimate();
+  const [movedToTop, setMovedToTop] = useState(false);
+
+  useEffect(() => {
+    if (animate && movedToTop && content && scope.current) {
+      animate(
+        scope.current,
+        {
+          opacity: 1,
+        },
+        {
+          duration: 2,
+          delay: stagger(0.2),
+        }
+      );
+    }
+  }, [animate, movedToTop, content, scope]);
+
+  useEffect(() => {
+    // Function to scroll the new component into view at the top of the flex container
+    const scrollToTop = () => {
+      scope.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "end",
+      });
+      setMovedToTop(true);
+    };
+
+    scrollToTop();
+  }, [scope]);
+
+  return (
+    <motion.div
+      className={`flex w-fit px-4 py-2 rounded-lg max-w-md ml-auto bg-blue-600 text-white`}
+      ref={scope}
+      style={{ opacity: 0 }}
+    >
+      <motion.p className="leading-7 text-white">{content}</motion.p>
+    </motion.div>
+  );
 };
 
 const AnimateMsg: FC<{ content: string }> = (props) => {
@@ -46,7 +83,7 @@ const AnimateMsg: FC<{ content: string }> = (props) => {
 
   return (
     <div className="flex w-full px-4 py-2">
-      <motion.p ref={scope} className="leading-9">
+      <motion.p ref={scope} className="leading-7">
         {wordsArray.map((word, idx) => {
           return (
             <motion.span key={word + idx} style={{ opacity: 0 }}>
@@ -80,7 +117,7 @@ const AnimatedMessage: FC<{ content: string }> = (props) => {
 
   return (
     <div className="flex w-full px-4 py-2">
-      <motion.p ref={scope} className="leading-9">
+      <motion.p ref={scope} className="leading-7">
         {wordsArray.map((word, idx) => {
           return (
             <>

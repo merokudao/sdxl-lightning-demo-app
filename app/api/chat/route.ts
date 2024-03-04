@@ -25,6 +25,8 @@ export async function POST(req: Request) {
   // Ask Groq for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
     model: LLM_MODEL,
+    max_tokens: MAX_TOKENS,
+    temperature: TEMPERATURE,
     stream: true,
     messages,
   });
