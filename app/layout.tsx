@@ -36,7 +36,9 @@ export default function RootLayout({
         <Providers>
           <>
             <Nav />
-            <div className="flex w-full h-full overflow-y-auto">{children}</div>
+            <div className="flex w-full h-full max-w-4xl mx-auto overflow-y-auto">
+              {children}
+            </div>
           </>
         </Providers>
       </body>
