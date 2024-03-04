@@ -27,7 +27,7 @@ const ChatPage: React.FC = () => {
         onChange={handleInputChange}
         isLoading={isLoading}
       />
-      <div className="flex w-full h-[10%] absolute bg-gradient-to-b to-100% from-black to-transparent"></div>
+      <div className="flex w-full h-[10%] absolute bg-gradient-to-b to-100% dark:from-black from-white to-transparent"></div>
     </div>
   );
 };

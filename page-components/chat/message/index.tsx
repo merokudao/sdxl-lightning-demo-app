@@ -1,5 +1,5 @@
 import { Message } from "ai/react";
-import { FC, useDeferredValue, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { motion, useAnimate, stagger } from "framer-motion";
 
 interface MessageProps {
@@ -18,13 +18,43 @@ const Message: FC<MessageProps> = (props: MessageProps) => {
 
 const AnimateUserMessage: FC<{ content: string }> = (props) => {
   const { content } = props;
+  const [scope, animate] = useAnimate();
+  const [movedToTop, setMovedToTop] = useState(false);
+
+  useEffect(() => {
+    if (animate && movedToTop && content && scope.current) {
+      animate(
+        scope.current,
+        {
+          opacity: 1,
+        },
+        {
+          duration: 2,
+          delay: stagger(0.2),
+        }
+      );
+    }
+  }, [animate, movedToTop, content, scope]);
+
+  useEffect(() => {
+    // Function to scroll the new component into view at the top of the flex container
+    const scrollToTop = () => {
+      scope.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "end",
+      });
+      setMovedToTop(true);
+    };
+
+    scrollToTop();
+  }, [scope]);
 
   return (
     <motion.div
       className={`flex w-fit px-4 py-2 rounded-lg max-w-md ml-auto bg-blue-600 text-white`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      ref={scope}
+      style={{ opacity: 0 }}
     >
       <motion.p className="leading-7 text-white">{content}</motion.p>
     </motion.div>
