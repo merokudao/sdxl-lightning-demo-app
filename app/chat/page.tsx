@@ -11,7 +11,7 @@ const ChatPage: React.FC = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
-    <div className="flex flex-col w-full max-w-2xl mx-auto h-full text-xl">
+    <div className="flex flex-col w-full max-w-2xl mx-auto h-full text-xl pb-10 overflow-hidden">
       <div className="flex flex-col w-full h-full px-8 py-4 gap-8 overflow-y-auto">
         <AnimatedMessage content={initialMessage} />
         {messages.map((message, index) => (
