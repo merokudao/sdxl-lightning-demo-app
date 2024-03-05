@@ -6,6 +6,11 @@ interface MessageProps {
   message: Message;
 }
 
+const animationConfig = {
+  duration: 0.8,
+  delay: stagger(0.1),
+};
+
 const Message: FC<MessageProps> = (props: MessageProps) => {
   const { role, content } = props.message;
 
@@ -28,10 +33,7 @@ const AnimateUserMessage: FC<{ content: string }> = (props) => {
         {
           opacity: 1,
         },
-        {
-          duration: 2,
-          delay: stagger(0.2),
-        }
+        animationConfig
       );
     }
   }, [animate, movedToTop, content, scope]);
@@ -74,10 +76,7 @@ const AnimateMsg: FC<{ content: string }> = (props) => {
       {
         opacity: 1,
       },
-      {
-        duration: 2,
-        delay: stagger(0.2),
-      }
+      animationConfig
     );
   }, [content, animate]);
 
@@ -108,10 +107,7 @@ const AnimatedMessage: FC<{ content: string }> = (props) => {
       {
         opacity: 1,
       },
-      {
-        duration: 2,
-        delay: stagger(0.2),
-      }
+      animationConfig
     );
   }, [animate]);
 

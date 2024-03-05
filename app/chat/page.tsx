@@ -1,15 +1,25 @@
 "use client";
-import React from "react";
+import React, { FormEvent } from "react";
 import { useChat } from "ai/react";
 import { InputForm } from "@/page-components/chat/input-form";
 import { AnimatedMessage, Message } from "@/page-components/chat/message";
+import { useWallet } from "@/components/wallet-provider";
 
 const initialMessage =
-  "Hey there, great to meet you. I’m Pi, your personal AI. \n My goal is to be useful, friendly and fun. Ask me for advice, for answers, or let’s talk about whatever’s on your mind. \n How's your day going?";
+  "Hey there, great to meet you. I’m Friday, your personal AI. \n My goal is to be useful, friendly and fun. Ask me for advice, for answers, or let’s talk about whatever’s on your mind. \n How's your day going?";
 
 const ChatPage: React.FC = () => {
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat();
+
+  const { executeOperation, canExecuteOperation } = useWallet();
+
+  const submitAndDeduct = (e: FormEvent<HTMLFormElement>) => {
+    if (canExecuteOperation()) {
+      handleSubmit(e);
+      executeOperation();
+    }
+  };
 
   return (
     <div className="flex flex-col w-full max-w-2xl mx-auto h-full text-lg pb-10 overflow-hidden relative">
@@ -21,7 +31,7 @@ const ChatPage: React.FC = () => {
         ))}
       </div>
       <InputForm
-        handleSubmit={handleSubmit}
+        handleSubmit={submitAndDeduct}
         value={input}
         placeholder="Ask me anything!"
         onChange={handleInputChange}
